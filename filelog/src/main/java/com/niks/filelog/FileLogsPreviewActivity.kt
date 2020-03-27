@@ -9,7 +9,7 @@ class FileLogsPreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_logs_previewer)
-        FileLogHelper.context = this
+        FileLogHelper.context = this.applicationContext
         var text = FileLogHelper.getLogs()
         if (text?.isBlank()) {
             text = "None"
