@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.niks.filelog">
+
+    <application>
+        <activity
+            android:name=".FileLogsPreviewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name=".FileLogCodeReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data
+                    android:host="1221"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
