@@ -2,6 +2,9 @@
 AndroidFileLogger
 
 ```
+Dail this on Phone dailer to see logs
+*#*#1221#*#*
+
 FileLogHelper.context = this
 
 To Log
