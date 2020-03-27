@@ -2,6 +2,8 @@
 AndroidFileLogger
 
 ```
+FileLogHelper.context = this
+
 To Log
 FileLogHelper.appendLog( "niks here")
 
