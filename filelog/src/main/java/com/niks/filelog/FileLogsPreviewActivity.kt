@@ -10,6 +10,10 @@ class FileLogsPreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_logs_previewer)
         FileLogHelper.context = this.applicationContext
+    }
+
+    override fun onStart() {
+        super.onStart()
         var text = FileLogHelper.getLogs()
         if (text?.isBlank()) {
             text = "None"

@@ -37,15 +37,19 @@ class FileLogCodeReceiver : BroadcastReceiver() {
             .setContentTitle("Logs")
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.ic_notification)
+
+        val intent = Intent(context, FileLogsPreviewActivity::class.java)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        FLAG_ACTIVITY_NEW_TASK
         builder.setContentIntent(
             PendingIntent.getActivity(
                 context,
                 0,
-                Intent(context, FileLogsPreviewActivity::class.java),
+                intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
         )
         notificationManagerCompat.notify(0, builder.build())
     }
-
 }
