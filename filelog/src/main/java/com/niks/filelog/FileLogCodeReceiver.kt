@@ -39,9 +39,7 @@ class FileLogCodeReceiver : BroadcastReceiver() {
             .setSmallIcon(R.drawable.ic_notification)
 
         val intent = Intent(context, FileLogsPreviewActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         builder.setContentIntent(
             PendingIntent.getActivity(
                 context,

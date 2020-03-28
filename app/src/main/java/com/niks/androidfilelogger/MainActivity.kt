@@ -1,8 +1,7 @@
 package com.niks.androidfilelogger
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.niks.filelog.FileLogCodeReceiver
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
