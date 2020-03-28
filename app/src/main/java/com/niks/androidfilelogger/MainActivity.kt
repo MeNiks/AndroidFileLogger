@@ -9,11 +9,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        FileLogHelper.context = this.applicationContext
-        FileLogHelper.appendLog(
-            "super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)super.onCreate(savedInstanceState)\n" +
-                "        setContentView(R.layout.activity_main)\n" +
-                "        FileLogHelper.context = this.applicationContext"
-        )
+        FileLogHelper.initialize(this.applicationContext)
+
+        FileLogHelper.log("App Launched")
+        FileLogHelper.log(tag = "Niks", message = "App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched")
     }
 }
