@@ -15,8 +15,10 @@ class FileLogsPreviewActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         var text = FileLogHelper.getLogs()
-        if (text?.isBlank()) {
-            text = "None"
+        text = if (text.isBlank()) {
+            "None"
+        } else {
+            "<p>$text</p>"
         }
         webView.loadData(text, "text/html", "UTF-8")
     }

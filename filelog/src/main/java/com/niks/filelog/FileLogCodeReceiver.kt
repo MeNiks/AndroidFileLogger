@@ -34,7 +34,7 @@ class FileLogCodeReceiver : BroadcastReceiver() {
         }
         val builder = NotificationCompat
             .Builder(context, channelId)
-            .setContentTitle("Logs")
+            .setContentTitle("Click here to check logs")
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.ic_notification)
 
