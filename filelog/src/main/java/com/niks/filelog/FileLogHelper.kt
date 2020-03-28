@@ -3,6 +3,7 @@ package com.niks.filelog
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SimpleSQLiteQuery
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -49,14 +50,25 @@ object FileLogHelper {
         )
     }
 
-    fun getAllLogs(tag: String): Observable<List<LogDWO>> {
+    fun getAllLogs(tag: String, timeStampSortOrder: String): Observable<List<LogDWO>> {
         return logDWODao
-            .getAllLogs(tag)
+            .getAllLogs(
+                SimpleSQLiteQuery(
+                    "SELECT * FROM ${LogDWO.TABLE_NAME} " +
+                        "WHERE ${LogDWO.TAG} = '$tag' " +
+                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                )
+            )
     }
 
-    fun getAllLogs(): Observable<List<LogDWO>> {
+    fun getAllLogs(timeStampSortOrder: String): Observable<List<LogDWO>> {
         return logDWODao
-            .getAllLogs()
+            .getAllLogs(
+                SimpleSQLiteQuery(
+                    "SELECT * FROM ${LogDWO.TABLE_NAME} " +
+                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                )
+            )
     }
 
     fun getAllTags() = logDWODao.getAllTags()
