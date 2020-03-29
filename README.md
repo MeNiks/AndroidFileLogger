@@ -1,5 +1,4 @@
 # AndroidFileLogger
-AndroidFileLogger
 
 Dail this on Phone dailer to see logs
 ```
