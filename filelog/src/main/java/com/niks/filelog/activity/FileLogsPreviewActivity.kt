@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_file_logs_previewer.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class FileLogsPreviewActivity : AppCompatActivity() {
 
@@ -86,6 +87,7 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 .map { logDwoList ->
                     logDwoList.joinToString(separator = "", transform = { logDow -> logDow.timestamp.readableDate() + " : " + logDow.message + "<br><br>" })
                 }
+                .throttleFirst(5, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { text ->
                     if (text.isBlank()) {
