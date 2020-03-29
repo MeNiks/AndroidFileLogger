@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".FileLogsPreviewActivity"
+            android:name=".activity.FileLogsPreviewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

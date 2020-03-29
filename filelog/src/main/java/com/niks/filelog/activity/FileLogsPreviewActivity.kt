@@ -1,4 +1,4 @@
-package com.niks.filelog
+package com.niks.filelog.activity
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,8 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.niks.filelog.FileLogHelper
+import com.niks.filelog.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -76,11 +78,9 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 .observeOn(Schedulers.io())
                 .switchMap { (tag, order) ->
                     if (tag.equals(FileLogHelper.COMMON_TAG, true)) {
-                        FileLogHelper
-                            .getAllLogs(timeStampSortOrder = order)
+                        FileLogHelper.getAllLogs(timeStampSortOrder = order)
                     } else
-                        FileLogHelper
-                            .getAllLogs(tag = tag, timeStampSortOrder = order)
+                        FileLogHelper.getAllLogs(tag = tag, timeStampSortOrder = order)
                 }
 
                 .map { logDwoList ->
@@ -91,11 +91,10 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                     if (text.isBlank()) {
                         webView.loadData("None", "text/html", "UTF-8")
                     } else {
-                        webView.loadData("<p>$text</p>", "text/html", "UTF-8")
+                        webView.loadData("<div style='white-space: nowrap;'>$text</div>", "text/html", "UTF-8")
                     }
                 },
-            FileLogHelper
-                .getAllTags()
+            FileLogHelper.getAllTags()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { tagsList: List<String> ->

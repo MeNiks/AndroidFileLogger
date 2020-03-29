@@ -1,4 +1,4 @@
-package com.niks.filelog
+package com.niks.filelog.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.niks.filelog.db.LogDWO
 import io.reactivex.Observable
 
 @Dao

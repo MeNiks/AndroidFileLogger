@@ -1,4 +1,4 @@
-package com.niks.filelog
+package com.niks.filelog.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

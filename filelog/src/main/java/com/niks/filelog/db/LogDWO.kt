@@ -1,4 +1,4 @@
-package com.niks.filelog
+package com.niks.filelog.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

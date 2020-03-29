@@ -10,6 +10,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.niks.filelog.activity.FileLogsPreviewActivity
 
 class FileLogCodeReceiver : BroadcastReceiver() {
 

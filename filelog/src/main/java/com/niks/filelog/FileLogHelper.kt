@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SimpleSQLiteQuery
+import com.niks.filelog.db.AppDatabase
+import com.niks.filelog.db.LogDWO
+import com.niks.filelog.db.LogDWODao
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
