@@ -34,8 +34,10 @@ class FileLogsPreviewActivity : AppCompatActivity() {
         tagsSpinner.adapter = tagsSpinnerAdapter
         tagsSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) { // your code here
-                tag = tagsSpinnerAdapter.getItem(position) ?: ""
-                displayLogsForTagSubject.onNext(tag to timeStampSortOrder)
+                if (!tag.equals(tagsSpinnerAdapter.getItem(position) ?: "", true)) {
+                    tag = tagsSpinnerAdapter.getItem(position) ?: ""
+                    displayLogsForTagSubject.onNext(tag to timeStampSortOrder)
+                }
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) { // your code here
@@ -48,8 +50,10 @@ class FileLogsPreviewActivity : AppCompatActivity() {
         timeStampSpinner.adapter = timeStampSortAdapter
         timeStampSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) { // your code here
-                timeStampSortOrder = timeStampSortAdapter.getItem(position) ?: ""
-                displayLogsForTagSubject.onNext(tag to timeStampSortOrder)
+                if (!timeStampSortOrder.equals(timeStampSortAdapter.getItem(position) ?: "", true)) {
+                    timeStampSortOrder = timeStampSortAdapter.getItem(position) ?: ""
+                    displayLogsForTagSubject.onNext(tag to timeStampSortOrder)
+                }
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) { // your code here
