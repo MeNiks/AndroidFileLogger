@@ -17,6 +17,7 @@ import java.util.Locale
 
 class FileLogsPreviewActivity : AppCompatActivity() {
 
+    private var tagsList = arrayListOf<String>()
     private val compositeDisposable = CompositeDisposable()
     private val displayLogsForTagSubject: PublishSubject<Pair<String, String>> = PublishSubject.create()
 
@@ -97,9 +98,13 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 .getAllTags()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { tagsList ->
-                    tagsSpinnerAdapter.clear()
-                    tagsSpinnerAdapter.addAll(tagsList)
+                .subscribe { tagsList: List<String> ->
+                    if (this.tagsList.size != tagsList.size) {
+                        tagsSpinnerAdapter.clear()
+                        tagsSpinnerAdapter.addAll(tagsList)
+                        this.tagsList.clear()
+                        this.tagsList.addAll(tagsList)
+                    }
                 }
         )
     }
