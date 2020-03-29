@@ -81,8 +81,8 @@ public final class HttpLoggingInterceptor implements Interceptor {
         boolean hasRequestBody = requestBody != null;
 
         Connection connection = chain.connection();
-        String requestStartMessage = NEWLINE + "--> "
-                + NEWLINE + request.method()
+        String requestStartMessage = NEWLINE + "--> START "
+                + request.method()
                 + NEWLINE + ' ' + request.url()
                 + (connection != null ? NEWLINE + " " + connection.protocol() : "");
         if (!logHeaders && hasRequestBody) {
