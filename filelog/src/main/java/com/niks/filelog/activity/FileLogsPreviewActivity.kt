@@ -87,7 +87,6 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 .map { logDwoList ->
                     logDwoList.joinToString(separator = "", transform = { logDow -> logDow.timestamp.readableDate() + " : " + logDow.message + "<br><br>" })
                 }
-                .throttleFirst(5, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { text ->
                     if (text.isBlank()) {

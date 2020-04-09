@@ -58,10 +58,11 @@ object FileLogHelper {
             .getAllLogs(
                 SimpleSQLiteQuery(
                     "SELECT * FROM ${LogDWO.TABLE_NAME} " +
-                        "WHERE ${LogDWO.TAG} = '$tag' " +
-                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                            "WHERE ${LogDWO.TAG} = '$tag' " +
+                            "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
                 )
             )
+            .toObservable()
     }
 
     fun getAllLogs(timeStampSortOrder: String): Observable<List<LogDWO>> {
@@ -69,9 +70,10 @@ object FileLogHelper {
             .getAllLogs(
                 SimpleSQLiteQuery(
                     "SELECT * FROM ${LogDWO.TABLE_NAME} " +
-                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                            "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
                 )
             )
+            .toObservable()
     }
 
     fun getAllTags() = logDWODao.getAllTags()
