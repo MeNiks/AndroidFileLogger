@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="message">Message</string>
     <string name="apply_filters">Apply Filters</string>
     <string name="close">Close</string>
+    <string name="refresh">Refresh</string>
 </resources>

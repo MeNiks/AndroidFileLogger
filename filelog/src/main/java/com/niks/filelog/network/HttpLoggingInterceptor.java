@@ -1,5 +1,7 @@
 package com.niks.filelog.network;
 
+import com.niks.filelog.FileLogHelper;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -14,12 +16,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.internal.http.HttpHeaders;
-import okhttp3.internal.platform.Platform;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.GzipSource;
 
-import static okhttp3.internal.platform.Platform.INFO;
 
 public final class HttpLoggingInterceptor implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
@@ -31,26 +31,6 @@ public final class HttpLoggingInterceptor implements Interceptor {
         BODY
     }
 
-    public interface Logger {
-        void log(String message);
-
-        Logger DEFAULT = new Logger() {
-            @Override
-            public void log(String message) {
-                Platform.get().log(INFO, message, null);
-            }
-        };
-    }
-
-    public HttpLoggingInterceptor() {
-        this(Logger.DEFAULT);
-    }
-
-    public HttpLoggingInterceptor(Logger logger) {
-        this.logger = logger;
-    }
-
-    private final Logger logger;
 
     private volatile Level level = Level.NONE;
     private final String NEWLINE = "</br></br>";
@@ -209,7 +189,8 @@ public final class HttpLoggingInterceptor implements Interceptor {
                 }
             }
         }
-        logger.log(stringBuilder.toString());
+
+        FileLogHelper.INSTANCE.log("NETWORK", request.url().url().toString(), stringBuilder.toString());
 
         return response;
     }

@@ -13,5 +13,6 @@ class MainActivity : AppCompatActivity() {
 
         FileLogHelper.log("App Launched")
         FileLogHelper.log(tag = "Niks", message = "App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched")
+        FileLogHelper.log(tag = "Niks", message = "This is short", longInfo = "App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched")
     }
 }

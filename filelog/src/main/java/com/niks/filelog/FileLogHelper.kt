@@ -44,11 +44,12 @@ object FileLogHelper {
             )
     }
 
-    fun log(message: String, tag: String = COMMON_TAG) {
+    fun log(message: String, tag: String = COMMON_TAG, longInfo: String = "") {
         logMessageSubject.onNext(
             LogDWO(
                 message = message,
-                tag = tag
+                tag = tag,
+                longInfo = longInfo
             )
         )
     }
