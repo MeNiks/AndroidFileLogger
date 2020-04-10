@@ -11,6 +11,9 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 
 object FileLogHelper {
 
@@ -78,6 +81,28 @@ object FileLogHelper {
     }
 
     fun getAllTags() = logDWODao.getAllTags()
+
+    fun writeToFile(text: String) {
+        try {
+            val bufferedWriter = BufferedWriter(FileWriter(getLogFile(context), true))
+            bufferedWriter.append(text)
+            bufferedWriter.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getLogFile(context: Context): File {
+        val directoryPath = File(context.cacheDir, "logs")
+        if (!directoryPath.exists()) {
+            directoryPath.mkdir()
+        }
+        val logFile = File(directoryPath, "request.log")
+        if (!logFile.exists()) {
+            logFile.createNewFile()
+        }
+        return logFile
+    }
 
     const val COMMON_TAG = "ALL"
 }

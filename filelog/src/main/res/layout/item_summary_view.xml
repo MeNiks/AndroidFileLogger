@@ -18,12 +18,26 @@
             android:paddingBottom="20dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/previewIB"
-            android:layout_width="match_parent"
+            android:id="@+id/shareIv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/itemTextView"
-            android:layout_centerHorizontal="true"
+            android:paddingStart="30dp"
             android:paddingTop="10dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_share_black_24dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/previewIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemTextView"
+            android:layout_toEndOf="@+id/shareIv"
+            android:layout_toRightOf="@+id/shareIv"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="30dp"
             android:paddingBottom="10dp"
             android:src="@drawable/ic_remove_red_eye_black_24dp" />
     </RelativeLayout>

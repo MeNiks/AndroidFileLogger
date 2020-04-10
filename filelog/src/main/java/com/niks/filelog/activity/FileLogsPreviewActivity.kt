@@ -1,15 +1,17 @@
 package com.niks.filelog.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.FileProvider
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +27,8 @@ import kotlinx.android.synthetic.main.apply_operations.view.*
 import kotlinx.android.synthetic.main.item_summary_view.view.*
 import kotlinx.android.synthetic.main.item_webview.view.*
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Date
+import java.util.Locale
 
 class FileLogsPreviewActivity : AppCompatActivity() {
 
@@ -213,13 +215,25 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 "<b>" + logDwo.timestamp.readableDate() + " : " + "</b>" + logDwo.message,
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
-            holder.itemView.previewIB.setOnClickListener {
+            holder.itemView.previewIv.setOnClickListener {
                 showLongMessage(logDwo.longInfo, logDwo.timestamp)
             }
             if (logDwo.longInfo.isNotBlank()) {
-                holder.itemView.previewIB.visibility = View.VISIBLE
+                holder.itemView.previewIv.visibility = View.VISIBLE
             } else {
-                holder.itemView.previewIB.visibility = View.GONE
+                holder.itemView.previewIv.visibility = View.GONE
+            }
+
+            holder.itemView.shareIv.setOnClickListener {
+                FileLogHelper.writeToFile(logDwo.longInfo)
+
+                val  contentUri = FileProvider.getUriForFile(activity, "com.niks.filelog.FileProvider", FileLogHelper.getLogFile(activity))
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                shareIntent.setDataAndType(contentUri, activity.contentResolver.getType(contentUri));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                activity.startActivity(Intent.createChooser(shareIntent, "Choose an app"));
             }
         }
 
