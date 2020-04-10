@@ -225,7 +225,11 @@ class FileLogsPreviewActivity : AppCompatActivity() {
             }
 
             holder.itemView.shareIv.setOnClickListener {
-                FileLogHelper.writeToFile(logDwo.longInfo)
+                if (logDwo.longInfo.isNotBlank()) {
+                    FileLogHelper.writeToFile(logDwo.longInfo)
+                } else {
+                    FileLogHelper.writeToFile(logDwo.message)
+                }
 
                 val contentUri = FileProvider.getUriForFile(activity, "com.niks.filelog.FileProvider", FileLogHelper.getLogFile(activity))
                 val shareIntent = Intent()

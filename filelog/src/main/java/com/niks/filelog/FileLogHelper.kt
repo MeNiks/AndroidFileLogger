@@ -84,8 +84,8 @@ object FileLogHelper {
 
     fun writeToFile(text: String) {
         try {
-            val bufferedWriter = BufferedWriter(FileWriter(getLogFile(context), true))
-            bufferedWriter.append(text)
+            val bufferedWriter = BufferedWriter(FileWriter(getLogFile(context)))
+            bufferedWriter.write(text)
             bufferedWriter.close()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -97,7 +97,7 @@ object FileLogHelper {
         if (!directoryPath.exists()) {
             directoryPath.mkdir()
         }
-        val logFile = File(directoryPath, "request.log")
+        val logFile = File(directoryPath, "request.txt")
         if (!logFile.exists()) {
             logFile.createNewFile()
         }
