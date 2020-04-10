@@ -227,13 +227,15 @@ class FileLogsPreviewActivity : AppCompatActivity() {
             holder.itemView.shareIv.setOnClickListener {
                 FileLogHelper.writeToFile(logDwo.longInfo)
 
-                val  contentUri = FileProvider.getUriForFile(activity, "com.niks.filelog.FileProvider", FileLogHelper.getLogFile(activity))
+                val contentUri = FileProvider.getUriForFile(activity, "com.niks.filelog.FileProvider", FileLogHelper.getLogFile(activity))
                 val shareIntent = Intent()
+
                 shareIntent.action = Intent.ACTION_SEND
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                shareIntent.setDataAndType(contentUri, activity.contentResolver.getType(contentUri));
-                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-                activity.startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+                shareIntent.setDataAndType(contentUri, activity.contentResolver.getType(contentUri))
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.app_name) + "(Logs) :" + logDwo.timestamp.readableDate())
+                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri)
+                activity.startActivity(Intent.createChooser(shareIntent, "Choose an app"))
             }
         }
 
@@ -254,7 +256,7 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 webView.loadData("None", "text/html", "UTF-8")
             } else {
                 webView.loadData(
-                    "<div style='white-space: nowrap;'>" + timestamp.readableDate() + " : " + message + "</div>",
+                    "<div style='white-space: nowrap'>" + timestamp.readableDate() + " : " + message + "</div>",
                     "text/html",
                     "UTF-8"
                 )
