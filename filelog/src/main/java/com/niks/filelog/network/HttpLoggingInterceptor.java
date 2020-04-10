@@ -190,7 +190,7 @@ public final class HttpLoggingInterceptor implements Interceptor {
             }
         }
 
-        FileLogHelper.INSTANCE.log("NETWORK", request.url().url().toString(), stringBuilder.toString());
+        FileLogHelper.INSTANCE.log(request.url().url().toString(), "NETWORK", stringBuilder.toString());
 
         return response;
     }
