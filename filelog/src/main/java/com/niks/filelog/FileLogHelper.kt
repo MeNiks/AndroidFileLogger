@@ -53,24 +53,24 @@ object FileLogHelper {
         )
     }
 
-    fun getAllLogs(tag: String, timeStampSortOrder: String): Observable<List<LogDWO>> {
+    fun getAllLogs(tag: String, timeStampSortOrder: String, limit: Int = 10): Observable<List<LogDWO>> {
         return logDWODao
             .getAllLogs(
                 SimpleSQLiteQuery(
                     "SELECT * FROM ${LogDWO.TABLE_NAME} " +
-                            "WHERE ${LogDWO.TAG} = '$tag' " +
-                            "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                        "WHERE ${LogDWO.TAG} = '$tag' " +
+                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder LIMIT $limit"
                 )
             )
             .toObservable()
     }
 
-    fun getAllLogs(timeStampSortOrder: String): Observable<List<LogDWO>> {
+    fun getAllLogs(timeStampSortOrder: String, limit: Int = 10): Observable<List<LogDWO>> {
         return logDWODao
             .getAllLogs(
                 SimpleSQLiteQuery(
                     "SELECT * FROM ${LogDWO.TABLE_NAME} " +
-                            "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder"
+                        "ORDER BY ${LogDWO.TIMESTAMP} $timeStampSortOrder LIMIT $limit"
                 )
             )
             .toObservable()

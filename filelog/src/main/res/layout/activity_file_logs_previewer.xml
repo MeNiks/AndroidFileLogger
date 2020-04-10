@@ -5,29 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/changeFilterTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <Spinner
-            android:id="@+id/tagsSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp" />
-
-        <Spinner
-            android:id="@+id/timeStampSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp" />
-    </LinearLayout>
-
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/apply_filters" />
 
     <WebView
         android:id="@+id/webView"
