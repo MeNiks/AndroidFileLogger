@@ -11,8 +11,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         FileLogHelper.initialize(this.applicationContext)
 
-        FileLogHelper.log("App Launched")
-        FileLogHelper.log(tag = "Niks", message = "App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched")
-        FileLogHelper.log(tag = "Niks", message = "This is short", longInfo = "App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched App Launched")
+        FileLogHelper.log("This is message")
+        FileLogHelper.log("This is message", longInfo = "This is longInfo")
+        FileLogHelper.log(
+            message = "This is message",
+            tag = "SomeTag",
+            longInfo = "This is longInfo"
+        )
+
+        //startActivity(Intent(this, FileLogsPreviewActivity::class.java))
     }
 }

@@ -1,18 +1,8 @@
 # Logging Utility
 
-Dail this on Phone dailer to see logs
+Dail this on Phone dailer to see logs you will get notification
 ```
 *#*#1221#*#*
-```
-
-To initialize library add this in Splash or Application Class
-```
-FileLogHelper.initialize(applicationContext)
-```
-
-To Log
-```
-FileLogHelper.log("This is the log")
 ```
 
 Step 1. Add the JitPack repository to your build file
@@ -31,4 +21,31 @@ Step 2. Add the dependency
 	dependencies {
 		debugImplementation("com.github.MeNiks:AndroidFileLogger:Tag")
 	}
+```
+
+Step 3(Optional). Support Network Logs(Okhttp)
+```
+
+import com.niks.filelog.network.HttpLoggingInterceptor
+
+httpClientBuilder.addInterceptor(HttpLoggingInterceptor())
+
+```
+
+Step 4(Optional). Timber Logs
+```
+import com.niks.filelog.timber.LoggingTree
+Timber.plant(LoggingTree())
+```
+
+Step 5. Initialize library in Application or SplashScreen
+```
+FileLogHelper.initialize(applicationContext)
+```
+
+Apis
+```
+FileLogHelper.log("This is message")
+FileLogHelper.log("This is message", longInfo = "This is longInfo")
+FileLogHelper.log(tag = "SomeTag",message = "This is message", longInfo = "This is longInfo")
 ```
