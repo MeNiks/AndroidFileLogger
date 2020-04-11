@@ -1,5 +1,6 @@
 package com.niks.filelog.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +26,7 @@ import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_file_logs_previewer.*
 import kotlinx.android.synthetic.main.apply_operations.view.*
 import kotlinx.android.synthetic.main.item_summary_view.view.*
-import kotlinx.android.synthetic.main.item_webview.view.*
+import kotlinx.android.synthetic.main.item_edittext.view.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -216,12 +217,7 @@ class FileLogsPreviewActivity : AppCompatActivity() {
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
             holder.itemView.previewIv.setOnClickListener {
-                showLongMessage(logDwo.longInfo, logDwo.timestamp)
-            }
-            if (logDwo.longInfo.isNotBlank()) {
-                holder.itemView.previewIv.visibility = View.VISIBLE
-            } else {
-                holder.itemView.previewIv.visibility = View.GONE
+                showLongMessage(logDwo)
             }
 
             holder.itemView.shareIv.setOnClickListener {
@@ -243,27 +239,27 @@ class FileLogsPreviewActivity : AppCompatActivity() {
             }
         }
 
-        private fun showLongMessage(message: String, timestamp: Long) {
+        @SuppressLint("SetTextI18n")
+        private fun showLongMessage(logDWO: LogDWO) {
+
+            val message = if (logDWO.longInfo.isNotBlank()) logDWO.longInfo else logDWO.message
+
             if (message.isBlank())
                 return
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
             val viewGroup = activity.findViewById<ViewGroup>(R.id.content)
-            val dialogView: View = layoutInflater.inflate(R.layout.item_webview, viewGroup, false)
+            val dialogView: View = layoutInflater.inflate(R.layout.item_edittext, viewGroup, false)
 
             val dialog = builder.setView(dialogView).create()
             dialog.setTitle(activity.getString(R.string.message))
             dialog.show()
 
-            val webView = dialogView.itemWebView
+            val itemEditText = dialogView.itemEditText
             if (message.isBlank()) {
-                webView.loadData("None", "text/html", "UTF-8")
+                itemEditText.setText("None")
             } else {
-                webView.loadData(
-                    "<div style='white-space: nowrap'>" + timestamp.readableDate() + " : " + message + "</div>",
-                    "text/html",
-                    "UTF-8"
-                )
+                itemEditText.setText(logDWO.timestamp.readableDate() + " : " + message)
             }
         }
 
